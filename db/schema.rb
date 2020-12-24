@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_24_125254) do
+ActiveRecord::Schema.define(version: 2020_12_24_133232) do
 
   create_table "clubs", force: :cascade do |t|
     t.string "name"
@@ -44,7 +44,20 @@ ActiveRecord::Schema.define(version: 2020_12_24_125254) do
     t.index ["league_id"], name: "index_matches_on_league_id"
   end
 
+  create_table "players", force: :cascade do |t|
+    t.string "firstname"
+    t.string "lastname"
+    t.string "position"
+    t.string "country"
+    t.date "birthday"
+    t.integer "club_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["club_id"], name: "index_players_on_club_id"
+  end
+
   add_foreign_key "matches", "clubs", column: "away_team_id"
   add_foreign_key "matches", "clubs", column: "home_team_id"
   add_foreign_key "matches", "leagues"
+  add_foreign_key "players", "clubs"
 end
