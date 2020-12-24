@@ -19,9 +19,9 @@
     <% @matches.each do |match| %>
       <tr>
         <td><%= match.kicked_off_at %></td>
-        <td><%= match.league_id %></td>
-        <td><%= match.home_team_id %></td>
-        <td><%= match.away_team_id %></td>
+        <td><%= match.league.name %></td>
+        <td><%= match.home_team.name %></td>
+        <td><%= match.away_team.name %></td>
         <td><%= match.home_team_score %></td>
         <td><%= match.away_team_score %></td>
         <td><%= link_to 'Show', match %></td>

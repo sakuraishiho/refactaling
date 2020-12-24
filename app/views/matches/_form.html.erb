@@ -18,17 +18,17 @@
 
   <div class="field">
     <%= form.label :league_id %>
-    <%= form.text_field :league_id %>
+    <%= form.select :league_id, League.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
   </div>
 
   <div class="field">
     <%= form.label :home_team_id %>
-    <%= form.text_field :home_team_id %>
+    <%= form.select :home_team_id, Club.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
   </div>
 
   <div class="field">
     <%= form.label :away_team_id %>
-    <%= form.text_field :away_team_id %>
+    <%= form.select :away_team_id, Club.all.collect { |p| [ p.name, p.id ] }, include_blank: true %>
   </div>
 
   <div class="field">
