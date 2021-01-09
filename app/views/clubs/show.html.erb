@@ -49,10 +49,28 @@
 <section>
   <p>
     <strong>Players:</strong>
-    <%# TODO: table にする %>
-    <% @club.players.each do |player| %>
-      <%= player.firstname %>
-    <% end %>
+    <table>
+      <thead>
+        <tr>
+          <th>firstname</th>
+          <th>lastname</th>
+          <th>position</th>
+          <th>country</th>
+          <th>birthday</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @club.players.each do |player| %>
+          <tr>
+            <td><%= player.firstname %></td>
+            <td><%= player.lastname %></td>
+            <td><%= player.position %></td>
+            <td><%= player.country %></td>
+            <td><%= player.birthday %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </p>
 </section>
 
