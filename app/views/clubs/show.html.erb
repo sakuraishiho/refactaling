@@ -30,5 +30,12 @@
   <%= @club.manager %>
 </p>
 
+<p>
+  <strong>Players:</strong>
+  <% @club.players.each do |player| %>
+    <%= player.firstname %>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <%= link_to 'Back', clubs_path %>
