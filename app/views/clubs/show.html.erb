@@ -1,41 +1,60 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @club.name %>
-</p>
+<section class="wrapper">
+  <div>
+    <p>
+      <strong>Name:</strong>
+      <%= @club.name %>
+    </p>
 
-<p>
-  <strong>Established on:</strong>
-  <%= @club.established_on %>
-</p>
+    <%# TODO: チームロゴを挿入する %>
+  </div>
 
-<p>
-  <strong>Hometown:</strong>
-  <%= @club.hometown %>
-</p>
+  <div>
+    <%# TODO: 街, 国 の順で表示するヘルパーを使う %>
+    <p>
+      <strong>Hometown:</strong>
+      <%= @club.hometown %>
+    </p>
 
-<p>
-  <strong>Country:</strong>
-  <%= @club.country %>
-</p>
+    <p>
+      <strong>Country:</strong>
+      <%= @club.country %>
+    </p>
 
-<p>
-  <strong>Color:</strong>
-  <%= @club.color %>
-</p>
+    <p>
+      <strong>Established on:</strong>
+      <%= @club.established_on %>
+    </p>
 
-<p>
-  <strong>Manager:</strong>
-  <%= @club.manager %>
-</p>
+    <p>
+      <strong>Manager:</strong>
+      <%= @club.manager %>
+    </p>
 
-<p>
-  <strong>Players:</strong>
-  <% @club.players.each do |player| %>
-    <%= player.firstname %>
-  <% end %>
-</p>
+    <p>
+      <strong>Color:</strong>
+      <%= @club.color %>
+    </p>
+
+    <%# TODO: 実際の戦績から算出する %>
+    <p>
+      <strong>Result:</strong>
+      253戦150勝30敗73分
+    </p>
+
+  </div>
+<section>
+
+<section>
+  <p>
+    <strong>Players:</strong>
+    <%# TODO: table にする %>
+    <% @club.players.each do |player| %>
+      <%= player.firstname %>
+    <% end %>
+  </p>
+</section>
 
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <%= link_to 'Back', clubs_path %>
