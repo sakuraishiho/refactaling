@@ -11,7 +11,7 @@
   </div>
 
   <div>
-    <%# TODO: 街, 国 の順で表示するヘルパーを使う %>
+    <%# TODO: 街, 国 の順で表示するでコレータを使う %>
     <p>
       <strong>Hometown:</strong>
       <%= @club.hometown %>
@@ -37,13 +37,14 @@
       <%= @club.color %>
     </p>
 
-    <%# TODO: 実際の戦績から算出する %>
+    <%# TODO: 実際の戦績から算出する。モデルにメソッド追加 %>
     <p>
       <strong>This year's Result:</strong>
       253戦150勝30敗73分
     </p>
 
     <p>
+      <%# TODO: 実際の戦績から算出する。モデルにメソッド追加 %>
       <strong>Players Avarage age</strong>
       25.5
     </p>
@@ -57,10 +58,12 @@
     <table>
       <thead>
         <tr>
+          <%# TODO: 選手名をデコレータで表現 %>
           <th>firstname</th>
           <th>lastname</th>
           <th>position</th>
           <th>country</th>
+          <%# TODO: モデルにメソッド追加 %>
           <th>birthday</th>
         </tr>
       </thead>
