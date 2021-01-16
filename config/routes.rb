@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  root to: "matches#index"
   resources :players
   resources :matches
   resources :leagues
   resources :clubs
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
