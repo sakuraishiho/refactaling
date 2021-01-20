@@ -13,32 +13,10 @@ class Club < ApplicationRecord
     matches.where(kicked_off_at: Date.new(year, 1, 1).in_time_zone.all_year)
   end
 
-  def total_result
-    # その年の通算成績を返す
+  def total_result_on(year=nil)
+    year = Date.current.year unless year
 
-    # 年度の指定があればそれを使う。なければ今年
-    # matches.where(kicked_off_at: year).each do |match|
-
-      # case文を使う
-      # case match.result
-      # when winner
-      #   win++
-      # when loser
-      #   lose++
-      # when draw
-      #   draw++
-      # end
-
-      # if 文を使う
-      # if won?(match)
-      #   won++
-      # elsif lost?(match)
-      #   lost++
-      # elsif draw?(match)
-      #   draw++
-      # end
-    # end
-      # [win, lose, draw]
+    [matches_on(year).count, win_on(year), lost_on(year), draw_on(year)]
   end
 
   def won?(match)
@@ -54,7 +32,7 @@ class Club < ApplicationRecord
   end
 
   def win_on(year)
-    year = Date.new(2021, 1, 1)
+    year = Date.new(year, 1, 1)
     count = 0
     matches.where(kicked_off_at: year.all_year).each do |match|
       count += 1 if won?(match)
@@ -63,7 +41,7 @@ class Club < ApplicationRecord
   end
 
   def lost_on(year)
-    year = Date.new(2021, 1, 1)
+    year = Date.new(year, 1, 1)
     count = 0
     matches.where(kicked_off_at: year.all_year).each do |match|
       count += 1 if lost?(match)
@@ -72,7 +50,7 @@ class Club < ApplicationRecord
   end
 
   def draw_on(year)
-    year = Date.new(2021, 1, 1)
+    year = Date.new(year, 1, 1)
     count = 0
     matches.where(kicked_off_at: year.all_year).each do |match|
       count += 1 if draw?(match)
