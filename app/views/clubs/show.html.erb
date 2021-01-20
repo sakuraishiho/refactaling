@@ -58,9 +58,7 @@
     <table>
       <thead>
         <tr>
-          <%# TODO: 選手名をデコレータで表現 %>
-          <th>firstname</th>
-          <th>lastname</th>
+          <th>full_name</th>
           <th>position</th>
           <th>country</th>
           <%# TODO: モデルにメソッド追加 %>
@@ -70,8 +68,7 @@
       <tbody>
         <% @club.players.each do |player| %>
           <tr>
-            <td><%= player.firstname %></td>
-            <td><%= player.lastname %></td>
+            <td><%= player.full_name %></td>
             <td><%= player.position %></td>
             <td><%= player.country %></td>
             <td><%= player.birthday %></td>
