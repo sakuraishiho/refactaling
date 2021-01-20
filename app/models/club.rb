@@ -57,4 +57,8 @@ class Club < ApplicationRecord
     end
     count
   end
+
+  def players_average_age
+    (players.sum(&:age) / players.length).to_f
+  end
 end
