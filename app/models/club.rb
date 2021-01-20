@@ -7,6 +7,12 @@ class Club < ApplicationRecord
     Match.where("home_team_id = ? OR away_team_id = ?", self.id, self.id)
   end
 
+  def matches_on(year = nil)
+    return nil unless year
+
+    matches.where(kicked_off_at: Date.new(year, 1, 1).in_time_zone.all_year)
+  end
+
   def total_result
     # その年の通算成績を返す
 
