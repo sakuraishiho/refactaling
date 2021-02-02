@@ -1,56 +1,3 @@
-clubs = [
-    { name: "Bulls FC",
-      established_on: "1894",
-      hometown: "London",
-      country: "England",
-      color: 'blue',
-      manager: "Melina Larson" },
-    { name: "Leon FC",
-      established_on: "1910",
-      hometown: "Liverpool",
-      country: "England",
-      color: "red",
-      manager: "Shanti Wolf" },
-    { name: "Birmingham United FC",
-      established_on: "1890",
-      hometown: "Birmingham",
-      country: "England",
-      color: "Yellow",
-      manager: "Jordon Ryan" },
-    { name: "Manchester Town FC",
-      established_on: "1902",
-      hometown: "Manchester",
-      country: "England",
-      color: "Black",
-      manager: "Nicky Walsh" },
-    { name: "Yokohama Bayside FC",
-      established_on: "1989",
-      hometown: "Yokohama",
-      country: "Japan",
-      color: "Blue",
-      manager: "Takuya Kuroda" },
-    { name: "Tokyo City FC",
-      established_on: "1981",
-      hometown: "Tokyo",
-      country: "Japan",
-      color: "Purple",
-      manager: "Shota Yamashita" },
-    { name: "FC Nagano",
-      established_on: "1991",
-      hometown: "Nagano",
-      country: "Japan",
-      color: "Yellow",
-      manager: "Floyd Turner" },
-    { name: "Saitama FC",
-      established_on: "1991",
-      hometown: "Saitama",
-      country: "Japan",
-      color: "Red",
-      manager: "Tsuyoshi Suzuki" }
-]
-
-clubs.each { |club| Club.find_or_create_by!(club) }
-
 leagues = [
     { name: 'Primal League',
       country: 'England',
@@ -61,6 +8,62 @@ leagues = [
 ]
 
 leagues.each { |league| League.create!(league) }
+
+clubs = [
+    { name: "Bulls FC",
+      established_on: "1894",
+      hometown: "London",
+      country: "England",
+      manager: "Melina Larson",
+      league: League.find_by!(name: 'Primal League') },
+    { name: "Leon FC",
+      established_on: "1910",
+      hometown: "Liverpool",
+      country: "England",
+      manager: "Shanti Wolf",
+      league: League.find_by!(name: 'Primal League') },
+    { name: "Birmingham United FC",
+      established_on: "1890",
+      hometown: "Birmingham",
+      country: "England",
+      manager: "Jordon Ryan",
+      league: League.find_by!(name: 'Primal League') },
+    { name: "Manchester Town FC",
+      established_on: "1902",
+      hometown: "Manchester",
+      country: "England",
+      manager: "Nicky Walsh",
+      league: League.find_by!(name: 'Primal League') },
+    { name: "Yokohama Bayside FC",
+      established_on: "1989",
+      hometown: "Yokohama",
+      country: "Japan",
+      manager: "Takuya Kuroda",
+      league: League.find_by!(name: 'Japan League') },
+    { name: "Tokyo City FC",
+      established_on: "1981",
+      hometown: "Tokyo",
+      country: "Japan",
+      manager: "Shota Yamashita",
+      league: League.find_by!(name: 'Japan League') },
+    { name: "FC Nagano",
+      established_on: "1991",
+      hometown: "Nagano",
+      country: "Japan",
+      manager: "Floyd Turner",
+      league: League.find_by!(name: 'Japan League') },
+    { name: "Saitama FC",
+      established_on: "1991",
+      hometown: "Saitama",
+      country: "Japan",
+      manager: "Tsuyoshi Suzuki",
+      league: League.find_by!(name: 'Japan League') }
+]
+
+clubs.each do |club|
+  created_club = Club.find_or_create_by!(club)
+  created_club.logo.attach(io: File.open("./lib/assets/logos/logo_#{created_club.name.gsub(' ', '').underscore}.png"), filename: "logo_#{created_club.name.sub(' ', '').underscore}.png", content_type: "image/png")
+end
 
 # /lib/generate_sample_players.rb を実行して得られた配列をコピペしている。詳しくは該当ファイル参照のこと
 players = [
@@ -257,7 +260,7 @@ matches_in_japan = [
   { kicked_off_at: Time.zone.local(Date.current.year - 1, 8, 28, 19, 30), league: League.find_by!(name: 'Japan League'), home_team: Club.find_by!(name: 'FC Nagano'), away_team: Club.find_by!(name: 'Tokyo City FC'), home_team_score: 0, away_team_score: 1 },
   { kicked_off_at: Time.zone.local(Date.current.year - 1, 8, 28, 20, 00), league: League.find_by!(name: 'Japan League'), home_team: Club.find_by!(name: 'Yokohama Bayside FC'), away_team: Club.find_by!(name: 'Saitama FC'), home_team_score: 4, away_team_score: 1 },
   { kicked_off_at: Time.zone.local(Date.current.year - 1, 9, 4, 12, 30), league: League.find_by!(name: 'Japan League'), home_team: Club.find_by!(name: 'Yokohama Bayside FC'), away_team: Club.find_by!(name: 'FC Nagano'), home_team_score: 3, away_team_score: 3 },
-  { kicked_off_at: Time.zone.local(Date.current.year - 1, 9, 4, 14, 00), league: League.find_by!(name: 'Japan League'), home_team: Club.find_by!(name: 'Manchester Town FC'), away_team: Club.find_by!(name: 'Tokyo City FC'), home_team_score: 1, away_team_score: 0 },
+  { kicked_off_at: Time.zone.local(Date.current.year - 1, 9, 4, 14, 00), league: League.find_by!(name: 'Japan League'), home_team: Club.find_by!(name: 'Saitama FC'), away_team: Club.find_by!(name: 'Tokyo City FC'), home_team_score: 1, away_team_score: 0 },
 ]
 
 matches_in_england.each { |match| Match.find_or_create_by!(match) }

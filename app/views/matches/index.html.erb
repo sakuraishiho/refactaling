@@ -1,9 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Matches</h1>
+<h1>Matche Results</h1>
 
 <% League.all.each do |league| %>
-  <h2><%= league.name %></h2>
+    <div style="display: flex;">
+      <h2><%= league.name %></h2>
+      <%= link_to "Show league table", league, style: "margin: auto 35px;" %>
+    </div>
     <table>
       <thead>
         <tr>
@@ -19,7 +22,7 @@
       <tbody>
         <% @matches.where(league: league).each do |match| %>
           <tr>
-            <td><%= match.kicked_off_at %></td>
+            <td><%= formatted_time_in(match.kicked_off_at, league.time_zone) %></td>
             <td><%= link_to match.home_team.name, match.home_team %></td>
             <td><%= match.home_team_score %></td>
             <td><%= match.away_team_score %></td>

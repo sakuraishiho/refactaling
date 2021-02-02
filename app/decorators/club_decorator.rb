@@ -1,6 +1,12 @@
 module ClubDecorator
-  def total_result_on_current_year
-    matches, won, lost, draw = total_result_on(Date.current.year)
-    "#{matches}戦#{won}勝#{draw}分#{lost}敗"
+  def total_result_on(year=nil)
+    year = Date.current.year unless year
+
+    matches = matches_on(year).count
+    won = win_on(year)
+    lost = lost_on(year)
+    draw = draw_on(year)
+
+    "matches: #{matches} won: #{won} lost: #{lost} draw: #{draw}"
   end
 end

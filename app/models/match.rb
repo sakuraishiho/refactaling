@@ -5,6 +5,9 @@ class Match < ApplicationRecord
 
   scope :draw, -> { where("home_team_score = away_team_score") }
 
+  validates :home_team_score, :away_team_score, presence: true
+  validate :same_club_must_not_play_same_match
+
   def winner
     return nil if draw?
 
@@ -27,5 +30,31 @@ class Match < ApplicationRecord
 
   def draw?
     home_team_score == away_team_score
+  end
+
+  def goal_by(club)
+    if club == home_team
+      home_team_score
+    elsif club == away_team
+      away_team_score
+    else
+      0
+    end
+  end
+
+  def goal_conceded_by(club)
+    if club == home_team
+      away_team_score
+    elsif club == away_team
+      home_team_score
+    else
+      0
+    end
+  end
+
+  private
+
+  def same_club_must_not_play_same_match
+    errors.add(:base, "home team and away team must be different") if home_team == away_team
   end
 end

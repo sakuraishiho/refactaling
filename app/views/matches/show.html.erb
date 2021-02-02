@@ -2,7 +2,7 @@
 
 <p>
   <strong>Kicked off at:</strong>
-  <%= @match.kicked_off_at %>
+  <%= formatted_time_in(@match.kicked_off_at, @match.league.time_zone) %>
 </p>
 
 <p>

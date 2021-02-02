@@ -1,7 +1,10 @@
 class Club < ApplicationRecord
+  has_one_attached :logo
+
   has_many :home_matches, class_name: "Match", foreign_key: "home_team_id"
   has_many :away_matches, class_name: "Match", foreign_key: "away_team_id"
   has_many :players
+  belongs_to :league
 
   def matches
     Match.where("home_team_id = ? OR away_team_id = ?", self.id, self.id)
@@ -11,12 +14,6 @@ class Club < ApplicationRecord
     return nil unless year
 
     matches.where(kicked_off_at: Date.new(year, 1, 1).in_time_zone.all_year)
-  end
-
-  def total_result_on(year=nil)
-    year = Date.current.year unless year
-
-    [matches_on(year).count, win_on(year), lost_on(year), draw_on(year)]
   end
 
   def won?(match)
@@ -58,7 +55,7 @@ class Club < ApplicationRecord
     count
   end
 
-  def players_average_age
-    (players.sum(&:age) / players.length).to_f
+  def homebase
+    "#{hometown}, #{country}"
   end
 end

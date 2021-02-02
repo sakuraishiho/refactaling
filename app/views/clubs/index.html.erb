@@ -9,7 +9,6 @@
       <th>Established on</th>
       <th>Hometown</th>
       <th>Country</th>
-      <th>Color</th>
       <th>Manager</th>
       <th colspan="3"></th>
     </tr>
@@ -22,7 +21,6 @@
         <td><%= club.established_on %></td>
         <td><%= club.hometown %></td>
         <td><%= club.country %></td>
-        <td><%= club.color %></td>
         <td><%= club.manager %></td>
         <td><%= link_to 'Show', club %></td>
         <td><%= link_to 'Edit', edit_club_path(club) %></td>
@@ -31,7 +29,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Club', new_club_path %>

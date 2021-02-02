@@ -1,25 +1,15 @@
 <p id="notice"><%= notice %></p>
+    <h1>
+      <%= @club.name %>
+    </h1>
 
 <section class="wrapper">
-  <div>
-    <p>
-      <strong>Name:</strong>
-      <%= @club.name %>
-    </p>
-
-    <%# TODO: チームロゴを挿入する %>
-  </div>
+  <%= image_tag @club.logo, size: "250x250" %>
 
   <div>
-    <%# TODO: 街, 国 の順で表示するでコレータを使う %>
     <p>
-      <strong>Hometown:</strong>
-      <%= @club.hometown %>
-    </p>
-
-    <p>
-      <strong>Country:</strong>
-      <%= @club.country %>
+      <strong>Homebase:</strong>
+      <%= @club.homebase %>
     </p>
 
     <p>
@@ -33,20 +23,14 @@
     </p>
 
     <p>
-      <strong>Color:</strong>
-      <%= @club.color %>
-    </p>
-
-    <%# TODO: 実際の戦績から算出する。モデルにメソッド追加 %>
-    <p>
-      <strong>This year's Result:</strong>
-      <%= @club.total_result_on_current_year %>
+      <strong>Results:</strong>
+      <%= last_year %>: <%= @club.total_result_on(last_year) %>,
+      <%= this_year %>: <%= @club.total_result_on(this_year) %>
     </p>
 
     <p>
-      <%# TODO: 実際の戦績から算出する。モデルにメソッド追加 %>
       <strong>Players Avarage age</strong>
-      25.5
+      <%= @players_average_age %>
     </p>
 
   </div>
@@ -54,23 +38,24 @@
 
 <section>
   <p>
-    <strong>Players:</strong>
+    <h1>Players:</h1>
     <table>
       <thead>
         <tr>
-          <th>full_name</th>
+          <th>name</th>
           <th>position</th>
           <th>country</th>
-          <%# TODO: モデルにメソッド追加 %>
+          <th>age</th>
           <th>birthday</th>
         </tr>
       </thead>
       <tbody>
         <% @club.players.each do |player| %>
           <tr>
-            <td><%= player.full_name %></td>
+            <td><%= "#{player.firstname} #{player.lastname}" %></td>
             <td><%= player.position %></td>
             <td><%= player.country %></td>
+            <td><%= player.age %></td>
             <td><%= player.birthday %></td>
           </tr>
         <% end %>
@@ -79,5 +64,4 @@
   </p>
 </section>
 
-<%= link_to 'Edit', edit_club_path(@club) %> |
-<%= link_to 'Back', clubs_path %>
+<%= link_to 'Back To Match Results', matches_path %>

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-describe 'クラブCRUD機能', type: :system do
-  describe 'クラブ詳細画面' do
-    describe '画面遷移機能' do
+describe 'Club CRUD functions', type: :system do
+  describe 'Club details page' do
+    describe 'Screen transition function' do
       let!(:club) { FactoryBot.create(:club, name: "Blue FC") }
 
       before do
@@ -20,21 +20,21 @@ describe 'クラブCRUD機能', type: :system do
         FactoryBot.create(:player, club: club, birthday: Date.current.years_ago(30))
       end
 
-      context 'クラブ詳細画面にアクセスした時' do
+      context 'When accessing the club details page' do
         before do
           visit club_path(club)
         end
 
-        it '戦績が正しく表示される' do
-          expect(page).to have_content "6戦1勝2分3敗"
+        it 'The match results is displayed correctly' do
+          expect(page).to have_content "matches: 6 won: 1 lost: 3 draw: 2"
         end
 
-        it '選手のフルネームが正しく表示される' do
+        it 'The full name of the player is displayed correctly' do
           expect(page).to have_content 'Taro Tanaka'
         end
 
-        it '選手の平均年齢が正しく表示される' do
-          expect(page).to have_content '25.5'
+        it 'The average age of the players is displayed correctly' do
+          expect(page).to have_content '25.0'
         end
       end
     end
