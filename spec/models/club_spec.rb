@@ -50,7 +50,7 @@ RSpec.describe Club, type: :model do
     end
 
     it 'Number of games won(1) is returned' do
-      expect(club_a.win_on(2021)).to eq 1
+      expect(club_a.win_on(Date.current.year)).to eq 1
     end
   end
 
