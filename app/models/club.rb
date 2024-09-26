@@ -6,6 +6,14 @@ class Club < ApplicationRecord
   has_many :players
   belongs_to :league
 
+  # クラブ所属選手の平均年齢を計算するメソッド
+  def average_age_of_players
+    return 0 if players.empty?
+  
+    average_age = players.map(&:age).sum / players.size.to_f
+    average_age.round(1)  # 小数点第1位まで丸める
+  end
+
   def matches
     Match.where("home_team_id = ? OR away_team_id = ?", self.id, self.id)
   end
@@ -28,34 +36,28 @@ class Club < ApplicationRecord
     match.draw?
   end
 
-  def win_on(year)
+  # 新しく追加するプライベートメソッド
+  private
+
+  def count_matches_on(year, result_check)
     year = Date.new(year, 1, 1)
-    count = 0
-    matches.where(kicked_off_at: year.all_year).each do |match|
-      count += 1 if won?(match)
+    matches.where(kicked_off_at: year.all_year).count do |match|
+      result_check.call(match)
     end
-    count
+  end
+
+  public
+
+  def win_on(year)
+    count_matches_on(year, ->(match) { won?(match) })
   end
 
   def lost_on(year)
-    year = Date.new(year, 1, 1)
-    count = 0
-    matches.where(kicked_off_at: year.all_year).each do |match|
-      count += 1 if lost?(match)
-    end
-    count
+    count_matches_on(year, ->(match) { lost?(match) })
   end
 
   def draw_on(year)
-    year = Date.new(year, 1, 1)
-    count = 0
-    matches.where(kicked_off_at: year.all_year).each do |match|
-      count += 1 if draw?(match)
-    end
-    count
+    count_matches_on(year, ->(match) { draw?(match) })
   end
 
-  def homebase
-    "#{hometown}, #{country}"
-  end
 end

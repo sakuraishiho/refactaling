@@ -9,7 +9,7 @@
   <div>
     <p>
       <strong>Homebase:</strong>
-      <%= @club.homebase %>
+      <%= @club.decorate.home_base %>
     </p>
 
     <p>
@@ -30,7 +30,7 @@
 
     <p>
       <strong>Players Avarage age</strong>
-      <%= @players_average_age %>
+      <%= @club.average_age_of_players %>
     </p>
 
   </div>
@@ -52,7 +52,7 @@
       <tbody>
         <% @club.players.each do |player| %>
           <tr>
-            <td><%= "#{player.firstname} #{player.lastname}" %></td>
+            <td><%= player.decorate.full_name %></td>
             <td><%= player.position %></td>
             <td><%= player.country %></td>
             <td><%= player.age %></td>
